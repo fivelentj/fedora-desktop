@@ -1,0 +1,41 @@
+---
+- name: install polybar dependencies
+  dnf: 
+    name: "{{ item }}"
+    state: latest
+  with_items:
+    - cmake
+    - "@development-tools"
+    - gcc-c++ 
+    - cairo-devel 
+    - xcb-proto 
+    - xcb-util-devel 
+    - xcb-util-wm-devel 
+    - xcb-util-image-devel
+    - jsoncpp-devel
+    - alsa-lib-devel
+    - wireless-tools-devel
+    - libmpdclient-devel
+    - libcurl-devel
+    - clang
+
+- name: clone polybar git repo
+  git:
+    repo: https://github.com/jaagr/polybar
+    dest: "{{ ansible_env.HOME }}/polybar"
+    clone: true
+
+- name: create build directory
+  file: 
+    path: "{{ ansible_env.HOME }}/polybar/build"
+    state: directory
+
+- name: compile polybar
+  shell: cmake -DCMAKE_C_COMPILER="clang" -DCMAKE_CXX_COMPILER="clang++" .. 
+  args:
+    chdir: "{{ ansible_env.HOME }}/polybar/build"
+
+- name: install polybar
+  shell: make install
+  args:
+    chdir: "{{ ansible_env.HOME }}/polybar/build"

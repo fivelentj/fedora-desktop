@@ -1,0 +1,11 @@
+---
+- name: Fedora desktop configuration
+  hosts: localhost
+  roles:
+    #Desktop roles
+    #- { role: common, become: true }
+    #- { role: i3gaps, become: true }
+    #- { role: compton, become: true }
+    #- { role: polybar, become: true }
+    - { role: rofi, become: true }
+
