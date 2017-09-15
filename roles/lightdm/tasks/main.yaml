@@ -1,0 +1,17 @@
+---
+- name: remove other desktop managers
+  dnf:
+    name: "{{ item }}"
+    state: absent
+  with_items:
+    - qtile
+    - awesome
+    - ratpoison
+    - xmonad
+    - openbox
+    - dwm
+
+- name: install helper packages for lightdm
+  dnf:
+    name: slick-greeter
+    state: latest

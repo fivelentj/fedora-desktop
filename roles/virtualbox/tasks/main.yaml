@@ -1,0 +1,16 @@
+---
+- name: install required packages
+  dnf:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+    - gcc
+    - kernel-devel
+    - kernel-headers
+    - dkms
+    - make
+    - bzip2
+    - perl
+
+- name: export KERN_DIR env variable
+  shell: KERN_DIR=/usr/src/kernels/$(uname -r) && export KERN_DIR
