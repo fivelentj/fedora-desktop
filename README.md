@@ -1,6 +1,6 @@
 # fedora-desktop
 
-Created to take the 'Basic Desktop' version of Fedora and install my desktop setup on it. Should also work on any RedHat variant if epel is enabled.
+Created to take the 'Minimal Install' version of Fedora and install my desktop setup on it.
 
 ### Prerequisites
 
@@ -29,12 +29,15 @@ Common:
   - rxvt-unicode: lightweight terminal emulator.
   - feh: used to set wallpapers.
   - vundle: a package manager for Vim.
+  - ImageMagick: Image processor
+  - Neovim: vim replacement
+  - pywal: Used to set color themes to various applicatinos
   
 i3gaps: Builds the latest [i3-gaps](https://github.com/Airblader/i3) from source.
 
-compton: Build the latest [compton](https://github.com/chjj/compton) from source. Used for transparancy in i3 and stops my virtual box instances from tearing.
+compton: Used for transparancy in i3 and stops my virtual box instances from tearing.
 
-lightdm: 'Basic Desktop' install on Fedora comes with several different desktop environments for lightdm, this removes most of them. Also installs slick-greeter for a better looking login screen.
+lightdm: Installs lightdm and slick-greeter for a better looking login screen.
 
 polybar: Builds the latest [polybar](https://github.com/jaagr/polybar) from source. Used as a replacement for the default status bar.
 
