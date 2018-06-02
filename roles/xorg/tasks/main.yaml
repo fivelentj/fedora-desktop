@@ -4,4 +4,4 @@
     name: "{{ item }}"
     state: latest
   with_items:
-    - @base-x
+    - '@base-x'
