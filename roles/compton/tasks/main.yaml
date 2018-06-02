@@ -1,44 +1,7 @@
 ---
-- name: install compton dependencies
+- name: install compton 
   dnf: 
     name: "{{ item }}"
     state: latest
   with_items:
-    - libX11-devel
-    - libXcomposite-devel
-    - libXdamage-devel
-    - libXfixes-devel
-    - libXext-devel
-    - libXrender-devel
-    - libXrandr-devel
-    - libXinerama-devel
-    - libpkgconf-devel
-    - pkgconf
-    - make
-    - xorg-x11-proto-devel
-    - xorg-x11-utils
-    - pcre
-    - pcre-devel
-    - libconfig-devel
-    - libdrm-devel
-    - mesa-libGL-devel
-    - dbus-devel
-    - asciidoc
-
-- name: clone compton git repo
-  git:
-    repo: https://github.com/chjj/compton
-    dest: "{{ ansible_env.HOME }}/compton"
-    clone: true
-
-- name: make and install compton
-  make:
-    target: install
-  args:
-    chdir: "{{ ansible_env.HOME }}/compton"
-
-- name: install docs
-  make:
-    target: docs
-  args:
-    chdir: "{{ ansible_env.HOME }}/compton"
+    - compton
