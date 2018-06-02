@@ -1,17 +1,19 @@
 ---
-- name: remove other desktop managers
+- name: install lightdm and greeter
   dnf:
     name: "{{ item }}"
-    state: absent
-  with_items:
-    - qtile
-    - awesome
-    - ratpoison
-    - xmonad
-    - openbox
-    - dwm
-
-- name: install helper packages for lightdm
-  dnf:
-    name: slick-greeter
     state: latest
+  with_items:
+    - lightdm
+    - slick-greeter
+
+- name: enable lightdm service
+  systemd:
+    name: lightdm
+    enabled: yes
+
+- name: enable slick greeter
+  lineinfile:
+    path: /etc/lightdm/lightdm.conf
+    regex: '^#greeter-session=example-gtk-gnome'
+    line: 'greeter-session=slick-greeter'
