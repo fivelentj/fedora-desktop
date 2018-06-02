@@ -14,7 +14,7 @@
 - name: install pywal
   pip:
     name: pywal
-    executable: pip-3.3
+    executable: pip-3
 
 - name: install vundle to vim
   git:
