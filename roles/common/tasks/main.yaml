@@ -8,7 +8,7 @@
     - libselinux-python
     - rxvt-unicode
     - feh
-    - imagemagick 
+    - ImageMagick 
     - neovim 
       
 - name: install pywal
