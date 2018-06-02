@@ -8,16 +8,20 @@
     - libselinux-python
     - rxvt-unicode
     - feh
+    - imagemagick 
+    - neovim 
+      
+- name: install pywal
+  pip:
+    name: pywal
+    executable: pip-3.3
 
-- name: install vundle
+- name: install vundle to vim
   git:
     repo: https://github.com/VundleVim/Vundle.vim.git
     dest: "{{ ansible_env.HOME }}/.vim/bundle/Vundle.vim"
 
-- name: Create config file
-  copy:
-    src: .vimrc
-    dest: "{{ ansible_env.HOME }}/.vimrc"
-    force: no
-    owner: "{{ ansible_env.USER }}"
-    group: "{{ ansible_env.USER }}"
+- name: install vundle to neovim
+  git:
+    repo: https://github.com/VundleVim/Vundle.vim.git
+    dest: "{{ ansible_env.HOME }}/.config/nvim/bundle/Vundle.vim"
