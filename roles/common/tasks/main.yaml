@@ -10,6 +10,7 @@
     - feh
     - ImageMagick 
     - neovim 
+    - stow
       
 - name: install pywal
   pip:
@@ -21,7 +22,19 @@
     repo: https://github.com/VundleVim/Vundle.vim.git
     dest: "{{ ansible_env.HOME }}/.vim/bundle/Vundle.vim"
 
+- name: set folder permissions for vim
+  file:
+    path: "{{ ansible_env.HOME }}/.vim"
+    owner: "{{ ansible_env.USER }}"
+    group: "{{ ansible_env.USER }}"
+
 - name: install vundle to neovim
   git:
     repo: https://github.com/VundleVim/Vundle.vim.git
     dest: "{{ ansible_env.HOME }}/.config/nvim/bundle/Vundle.vim"
+
+- name: set folder permissions for config
+  file:
+    path: "{{ ansible_env.HOME }}/.config"
+    owner: "{{ ansible_env.USER }}"
+    group: "{{ ansible_env.USER }}"
