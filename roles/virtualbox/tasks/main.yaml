@@ -1,16 +1,15 @@
 ---
-- name: install required packages
+- name: virtualbox - install dependencies 
   dnf:
-    name: "{{ item }}"
+    name: 
+      - gcc
+      - kernel-devel
+      - kernel-headers
+      - dkms
+      - make
+      - bzip2
+      - perl
     state: latest
-  with_items:
-    - gcc
-    - kernel-devel
-    - kernel-headers
-    - dkms
-    - make
-    - bzip2
-    - perl
 
 - name: export KERN_DIR env variable
   shell: KERN_DIR=/usr/src/kernels/$(uname -r) && export KERN_DIR

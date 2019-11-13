@@ -1,17 +1,16 @@
 ---
 - name: install common packages
   dnf:
-    name: "{{ item }}"
+    name: 
+      - vim-enhanced
+      - libselinux-python
+      - rxvt-unicode
+      - feh
+      - ImageMagick 
+      - neovim 
+      - stow
+      - neofetch
     state: latest
-  with_items:
-    - vim-enhanced
-    - libselinux-python
-    - rxvt-unicode
-    - feh
-    - ImageMagick 
-    - neovim 
-    - stow
-    - neofetch
       
 - name: install pywal
   pip:

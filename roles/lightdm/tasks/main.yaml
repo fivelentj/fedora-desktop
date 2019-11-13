@@ -1,18 +1,17 @@
 ---
-- name: install lightdm and greeter
+- name: lightdm and slick greeter - install packages
   dnf:
-    name: "{{ item }}"
+    name: 
+      - lightdm
+      - slick-greeter
     state: latest
-  with_items:
-    - lightdm
-    - slick-greeter
 
-- name: enable lightdm service
+- name: lightdm - enable service
   systemd:
     name: lightdm
     enabled: yes
 
-- name: enable slick greeter
+- name: slick greeter - enable
   lineinfile:
     path: /etc/lightdm/lightdm.conf
     regexp: '^#greeter-session=example-gtk-gnome'

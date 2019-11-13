@@ -1,52 +1,51 @@
 ---
-- name: install i3-gaps dependencies
+- name: i3 gaps - install dependencies
   dnf:
-    name: "{{ item }}"
+    name: 
+      - libxcb-devel 
+      - xcb-util-keysyms-devel 
+      - xcb-util-devel 
+      - xcb-util-wm-devel 
+      - xcb-util-xrm-devel 
+      - yajl-devel 
+      - libXrandr-devel 
+      - startup-notification-devel 
+      - libev-devel 
+      - xcb-util-cursor-devel 
+      - libXinerama-devel 
+      - libxkbcommon-devel 
+      - libxkbcommon-x11-devel 
+      - pcre-devel 
+      - pango-devel 
+      - git 
+      - gcc 
+      - automake
+      - i3status
+      - i3lock 
     state: latest
-  with_items:
-    - libxcb-devel 
-    - xcb-util-keysyms-devel 
-    - xcb-util-devel 
-    - xcb-util-wm-devel 
-    - xcb-util-xrm-devel 
-    - yajl-devel 
-    - libXrandr-devel 
-    - startup-notification-devel 
-    - libev-devel 
-    - xcb-util-cursor-devel 
-    - libXinerama-devel 
-    - libxkbcommon-devel 
-    - libxkbcommon-x11-devel 
-    - pcre-devel 
-    - pango-devel 
-    - git 
-    - gcc 
-    - automake
-    - i3status
-    - i3lock 
 
-- name: download i3-gaps from source
+- name: i3 gaps - download source
   git:
     repo: https://github.com/Airblader/i3.git
     dest: "{{ ansible_env.HOME }}/i3-gaps"
     clone: true
 
-- name: run autoreconf
+- name: i3 gaps - run autoreconf
   shell: autoreconf --force --install
   args:
     chdir: "{{ ansible_env.HOME }}/i3-gaps"
 
-- name: make build directory
+- name: i3 gaps - make build directory
   file:
     path: "{{ ansible_env.HOME }}/i3-gaps/build"
     state: directory
 
-- name: disable sanitizers per install docs
+- name: i3 gaps - disable sanitizers per install docs
   shell: ../configure --prefix=/usr --sysconfdir=/etc --disable-sanitizers
   args:
     chdir: "{{ ansible_env.HOME}}/i3-gaps/build"
 
-- name: compile and make i3-gaps
+- name: i3 gaps - compile and make
   make:
     target: install
   args:

@@ -1,7 +1,5 @@
 ---
-- name: install xorg
+- name: xorg - install
   dnf:
-    name: "{{ item }}"
+    name: '@base-x'
     state: latest
-  with_items:
-    - '@base-x'

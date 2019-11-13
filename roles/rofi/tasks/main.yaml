@@ -1,60 +1,59 @@
 ---
-- name: install rofi dependencies
+- name: rofi - install dependencies
   dnf:
-    name: "{{ item }}"
+    name: 
+      - gcc 
+      - make
+      - autoconf
+      - automake
+      - libpkgconf-devel
+      - pango-devel
+      - cairo-devel
+      - libxcb-devel
+      - xcb-util-devel
+      - glib2-devel
+      - startup-notification-devel
+      - libxkbcommon-devel
+      - libxkbcommon-x11-devel
+      - libxcb-devel
+      - xcb-util-wm-devel
+      - xcb-util-xrm-devel
+      - flex
+      - bison
+      - byacc
+      - check
+      - librsvg2-devel
+      - librsvg2
+      - check-devel
     state: latest
-  with_items:
-    - gcc 
-    - make
-    - autoconf
-    - automake
-    - libpkgconf-devel
-    - pango-devel
-    - cairo-devel
-    - libxcb-devel
-    - xcb-util-devel
-    - glib2-devel
-    - startup-notification-devel
-    - libxkbcommon-devel
-    - libxkbcommon-x11-devel
-    - libxcb-devel
-    - xcb-util-wm-devel
-    - xcb-util-xrm-devel
-    - flex
-    - bison
-    - byacc
-    - check
-    - librsvg2-devel
-    - librsvg2
-    - check-devel
 
-- name: get source from rofi repo
+- name: rofi - download source
   git:
     repo: https://github.com/DaveDavenport/rofi.git
     dest: "{{ ansible_env.HOME }}/rofi"
     clone: true
 
-- name: pull dependencies
+- name: rofi - pull dependencies
   shell: git submodule update --init
   args:
     chdir: "{{ ansible_env.HOME }}/rofi"
 
-- name: generate build system
+- name: rofi - generate build system
   shell: autoreconf -i
   args:
     chdir: "{{ ansible_env.HOME }}/rofi"
 
-- name: make build directory
+- name: rofi - make build directory
   file:
     path: "{{ ansible_env.HOME }}/rofi/build"
     state: directory
 
-- name: check dependencies and configure build system
+- name: rofi - build system
   shell: ../configure
   args:
     chdir: "{{ ansible_env.HOME }}/rofi/build"
 
-- name: build rofi
+- name: rofi - install
   make:
     target: install
   args:

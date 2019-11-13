@@ -1,7 +1,5 @@
 ---
 - name: install compton 
   dnf: 
-    name: "{{ item }}"
+    name: compton
     state: latest
-  with_items:
-    - compton
